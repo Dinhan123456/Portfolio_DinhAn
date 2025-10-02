@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <meta
+          name="description"
+          content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf"
+  />
+
+  <!-- Google / Search Engine Tags -->
+  <meta itemprop="name" content="Portfolio and AI Tarot">
+  <meta itemprop="description" content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf">
+
+  <!-- Reference screenshot of updated site's header in place of content -->
+  <meta itemprop="image" content="assets/images/sharing-card.png">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://github.com/chaurasia-aditya/spring-portfolio-website">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfolio and AI Tarot">
+  <meta property="og:description" content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf">
+
+  <!-- Reference screenshot of updated site's header in content -->
+  <meta property="og:image" content="assets/images/sharing-card.png">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio and AI Tarot">
+  <meta name="twitter:description" content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf">
+
+  <!-- Reference screenshot of updated site's header in content -->
+  <meta name="twitter:image" content="assets/images/sharing-card.png">
+
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"  />
+  <script src="script.js" defer></script>
+
+  <!-- Your name here -->
+  <title>Portfolio and AI Tarot</title>
+</head>
+
+<body>
+
+<script>
+  const theme = localStorage.getItem("theme") || "dark";
+  document.body.classList.add(theme);
+</script>
+
+<script th:inline="javascript">
+  let rateLimitError = /*[[${rateLimitError != null ? '"' + rateLimitError + '"' : 'null'}]]*/;
+  if (rateLimitError !== 'null') {
+    alert(rateLimitError);
+  }
+</script>
+
+<header class="header">
+
+  <nav class="nav">
+    <div class="container">
+      <ol class="nav-items">
+        <li class="nav-item"><a href="#">Trang chủ</a></li>
+        <li class="nav-item"><a href="#education">Học vấn</a></li>
+        <li class="nav-item"><a href="#projects">Dự án</a></li>
+        <li class="nav-item"><a href="#skills">Kỹ năng</a></li>
+        <li class="nav-item"><a href="#contact">Liên hệ</a></li>
+      </ol>
+      <a th:href="@{/admin}" class="nav-admin-btn">Đăng nhập quản trị viên</a>
+      <label class="theme-switch" for="theme-switch">
+        <span>Giao diện tối</span>
+        <input type="checkbox" id="theme-switch" role="switch"/>
+      </label>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="header-textbox">
+      <!-- Replace with your name and job title -->
+      <h1 class="h1">
+        <span>Xin chào, tôi là Đình An. Hiện tại tôi đang trong quá trình học tập và phát triển kỹ năng về lập trình web.</span>
+      </h1>
+
+      <!-- Add a small introductory paragraph about yourself -->
+      <p class="header-text">
+        Mục tiêu của tôi là không ngừng học hỏi, hoàn thiện bản thân, và hướng đến việc tham gia vào những dự án thực tế, nơi tôi có thể vừa đóng góp vừa tích lũy thêm kinh nghiệm.
+      </p>
+
+      <div class="header-btns">
+        <a href="#contact" class="btn btn-cta">Kết nối</a>
+        <a href="https://drive.google.com/drive/u/0/folders/1eU_TcuBDuSyL8s4QYJ6F5Kzd5BQ97MVp" download="BUIDINHANCV.pdf" class="btn btn-secondary">Hồ sơ</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Education -->
+  <section class="education">
+    <div class="container">
+      <h2 class="h2" id="education">Học vấn</h2>
+      <div class="education-boxes">
+        <article class="education-box featured-education" th:each="education : ${education}">
+          <div class="education-textbox">
+            <div>
+              <h3 th:text="${education.universityName}"></h3>
+              <h4 th:text="${education.program ne null ? education.degree + ' - ' + education.program : education.degree}"></h4>
+              <ul>
+                <li th:each="course : ${#strings.listSplit(education.coursesTaken, ',')}" th:text="${course}"></li>
+              </ul>
+            </div>
+          </div>
+          <picture class="education-illustration">
+            <!-- If imagePath is a full URL (http/https), use it directly -->
+            <img th:if="${education.imagePath != null and #strings.startsWith(education.imagePath, 'http')}"
+                 th:src="${education.imagePath}" alt="Hình ảnh học vấn" loading="lazy" />
+            <!-- If imagePath is a file name placed under static/assets/images/education/ -->
+            <img th:if="${education.imagePath != null and !#strings.startsWith(education.imagePath, 'http')}"
+                 th:src="@{'assets/images/education/' + ${education.imagePath}}" alt="Hình ảnh học vấn" loading="lazy" />
+            <!-- If imagePath is empty or null, use the default image -->
+            <img th:if="${education.imagePath == null}" src="assets/images/default-img.webp" alt="Default" loading="lazy" />
+          </picture>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Projects -->
+  <section class="projects">
+    <div class="container">
+      <h2 class="h2" id="projects">Dự án gần đây</h2>
+      <div class="project-boxes">
+        <article class="project-box" th:each="project : ${projects} ">
+          <div class="project-textbox">
+            <div>
+              <h3 class="h4" th:text="${project.name}">Tên dự án</h3>
+              <p class="project-text" th:text="${project.description}">Mô tả dự án</p>
+            </div>
+            <div class="project-info">
+              <a th:href="${project.projectLink}" class="link" target="_blank" rel="noopener"
+                 th:text="${project.projectLink != null ? 'Xem dự án' : ''}">Xem dự án</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h2 class="h2" id="skills">Kỹ năng</h2>
+    <div class="container">
+      <ol class="skills">
+        <li class="skill-category">
+          <div class="career-list">
+            <span th:each="career : ${career}" th:text="${career.skill}"></span>
+          </div>
+        </li>
+        <li class="skill">
+          <h3 class="h3">Ngôn ngữ lập trình</h3>
+          <ol class="skill-list">
+            <li th:each="language : ${languages}" th:text="${language.skill}"></li>
+          </ol>
+        </li>
+
+        <li class="skill">
+          <h3 class="h3">Framework/Thư viện</h3>
+          <ol class="skill-list">
+            <li th:each="framework : ${frameworks}" th:text="${framework.skill}"></li>
+          </ol>
+        </li>
+        <li class="skill">
+          <h3 class="h3">Công cụ</h3>
+          <ol class="skill-list">
+            <li th:each="tool : ${devOpsTools}" th:text="${tool.skill}"></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact">
+    <div class="container">
+      <h2 class="h2" id="contact">Liên hệ với tôi</h2>
+      <div class="contact-content">
+        <div class="contact-textbox">
+          <div class="hire-alert-div">
+            <a href="mailto:aditya.chaurasia8991@gmail.com" class="hire-alert">Gửi email cho tôi</a>
+          </div>
+
+          <p class="contact-text">
+            Tôi có niềm hứng thú đặc biệt với lập trình web và thiết kế giao diện người dùng,
+            thích khám phá cách công nghệ kết hợp với trải nghiệm người dùng để tạo ra những sản phẩm hữu ích.
+            Trong quá trình học tập, tôi đã tham gia một số dự án nhóm, từ đó rèn luyện kỹ năng phối hợp,
+            chia sẻ trách nhiệm và cùng nhau giải quyết vấn đề. Với động lực học hỏi không ngừng,
+            tôi mong muốn được đóng góp giá trị vào những dự án thực tế và phát triển bản thân trở thành một lập trình viên vững vàng.
+          </p>
+        </div>
+        <form th:action="@{/save-message}" th:object="${newMessage}" method="POST" class="contact-form">
+          <div class="form-field">
+            <label for="name">
+              Tên
+              <span th:if="${#fields.hasErrors('name')}" class="text-danger"> - trường này là bắt buộc</span>
+            </label>
+            <input type="text" th:field="*{name}" id="name" required
+                   th:placeholder="${#fields.hasErrors('name')} ? 'Trường này là bắt buộc' : 'Nhập tên của bạn'"/>
+          </div>
+          <div class="form-field">
+            <label for="email">
+              Email
+              <span th:if="${#fields.hasErrors('email')}" class="text-danger"> - trường này là bắt buộc</span>
+            </label>
+            <input type="email" th:field="*{email}" id="email" required inputmode="email"
+                   th:placeholder="${#fields.hasErrors('email')} ? 'Trường này là bắt buộc' : 'Nhập email của bạn'"/>
+            <!--                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>-->
+          </div>
+          <div class="form-field">
+            <label for="message">
+              Tôi có thể giúp gì cho bạn?
+              <span th:if="${#fields.hasErrors('message')}" class="text-danger"> - trường này là bắt buộc</span>
+            </label>
+            <textarea th:field="*{message}" id="message" required
+                      th:placeholder="${#fields.hasErrors('message')} ? *{message} : 'Nhập tin nhắn của bạn'"></textarea>
+            <!--                <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="text-danger"></div>-->
+          </div>
+          <button type="submit" class="btn btn-cta">Gửi</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <nav>
+        <ol class="footer-links">
+          <li class="footer-link">
+            <a title="GitHub" href="https://github.com/Dinhan123456" target="_blank" rel="noopener"
+            ><img
+                    loading="lazy"
+                    src="assets/images/social-links/github.svg"
+                    alt="GitHub"
+            /></a>
+          </li>
+          <li class="footer-link">
+            <a title="facebook" href="https://www.facebook.com/inhhann.2025" target="_blank" rel="noopener"
+            ><img
+                    loading="lazy"
+                    src="assets/images/social-links/face.png"
+                    alt="Linkedin"
+            /></a>
+          </li>
+        </ol>
+      </nav>
+      <p class="footer-text">
+        &copy; <span>2025</span> - Backend được phát triển và tích hợp bởi <a target="_blank" rel="noopener" href="https://github.com/Dinhan123456" style="text-decoration: none;">Đình An</a>
+      </p>
+
+    </div>
+  </div>
+</footer>
+<!-- ========== Bắt đầu: Khung chat AI Tarot ========== -->
+<div id="tarot-ai-chat-container">
+  <!-- Nút bấm để mở/đóng chat -->
+  <button id="tarot-chat-toggle" aria-label="Mở Tarot AI Chat">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"></path>
+      <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Z"></path>
+      <path d="m12 18 2-4-2-4-2 4 2 4Z"></path>
+    </svg>
+  </button>
+
+  <!-- Cửa sổ chat -->
+  <div id="tarot-chat-window" class="hidden">
+    <!-- Sửa lại khối div này -->
+    <div class="tarot-chat-header">
+      <h3>Tarot AI</h3>
+      <!-- Thêm nút bấm mới ở đây -->
+      <button id="tarot-chat-reset" aria-label="Bắt đầu chat mới">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+        </svg>
+      </button>
+      <button id="tarot-chat-close" aria-label="Đóng Chat">×</button>
+    </div>
+    <div id="tarot-chat-messages">
+      <!-- Tin nhắn của AI -->
+      <div class="chat-message ai-message">
+        <p>Chào bạn, tôi là Đình An Tarot AI. Hãy hỏi tôi một câu hỏi, và tôi sẽ rút một lá bài để đưa ra lời khuyên cho bạn.</p>
+      </div>
+    </div>
+    <form id="tarot-chat-form">
+      <input type="text" id="tarot-chat-input" placeholder="Hỏi điều bạn muốn biết..." autocomplete="off">
+      <button type="submit" aria-label="Gửi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </form>
+  </div>
+</div>
+<!-- ========== Kết thúc: Khung chat AI Tarot ========== -->
+</body>
+</html>

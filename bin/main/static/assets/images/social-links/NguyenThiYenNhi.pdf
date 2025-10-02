@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <meta
+          name="description"
+          content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf"
+  />
+
+  <!-- Google / Search Engine Tags -->
+  <meta itemprop="name" content="Portfolio của Yến Nhi">
+  <meta itemprop="description" content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf">
+
+  <!-- Reference screenshot of updated site's header in place of content -->
+  <meta itemprop="image" content="assets/images/sharing-card.png">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://github.com/chaurasia-aditya/spring-portfolio-website">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfolio của Yến Nhi">
+  <meta property="og:description" content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf">
+
+  <!-- Reference screenshot of updated site's header in content -->
+  <meta property="og:image" content="assets/images/sharing-card.png">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio của Yến Nhi">
+  <meta name="twitter:description" content="Được xây dựng bằng Spring Boot, Hibernate, Spring Data JPA, Thymeleaf">
+
+  <!-- Reference screenshot of updated site's header in content -->
+  <meta name="twitter:image" content="assets/images/sharing-card.png">
+
+
+  <!-- Update favicon href attribute with image of yourself -->
+<!--  <link-->
+<!--          rel="shortcut icon"-->
+<!--          href="assets/images/favicon.ico"-->
+<!--          type="image/ico"-->
+<!--  />-->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"  />
+  <script src="script.js" defer></script>
+
+  <!-- Your name here -->
+  <title>Portfolio của Yến Nhi</title>
+</head>
+
+<body>
+
+<script>
+  const theme = localStorage.getItem("theme") || "dark";
+  document.body.classList.add(theme);
+</script>
+
+<script>
+  let rateLimitError = "null";
+  if (rateLimitError !== 'null') {
+    alert(rateLimitError);
+  }
+</script>
+
+<header class="header">
+
+  <nav class="nav">
+    <div class="container">
+      <ol class="nav-items">
+        <li class="nav-item"><a href="#">Trang chủ</a></li>
+        <li class="nav-item"><a href="#education">Học vấn</a></li>
+        <li class="nav-item"><a href="#experience">Kinh nghiệm</a></li>
+        <li class="nav-item"><a href="#projects">Dự án</a></li>
+        <li class="nav-item"><a href="#skills">Kỹ năng</a></li>
+        <li class="nav-item"><a href="#contact">Liên hệ</a></li>
+      </ol>
+      <a href="/admin" class="nav-admin-btn">Đăng nhập quản trị viên</a>
+      <label class="theme-switch" for="theme-switch">
+        <span>Giao diện tối</span>
+        <input type="checkbox" id="theme-switch" role="switch"/>
+      </label>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="header-textbox">
+      <!-- Replace with your name and job title -->
+      <h1 class="h1">
+        <span>Xin chào, tôi là Yến Nhi. Hiện tại tôi đang trong quá trình học tập và phát triển kỹ năng về lập trình web.</span>
+      </h1>
+
+      <!-- Add a small introductory paragraph about yourself -->
+      <p class="header-text">
+        Mục tiêu của tôi là không ngừng học hỏi, hoàn thiện bản thân, và hướng đến việc tham gia vào những dự án thực tế, nơi tôi có thể vừa đóng góp vừa tích lũy thêm kinh nghiệm.
+      </p>
+
+      <div class="header-btns">
+        <a href="#contact" class="btn btn-cta">Kết nối</a>
+        <a href="#" download="NguyenThiYenNhi.pdf" class="btn btn-secondary">Hồ sơ</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Education -->
+  <section class="education">
+    <div class="container">
+      <h2 class="h2" id="education">Học vấn</h2>
+      <div class="education-boxes">
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Experiences -->
+  <section class="industry">
+    <div class="container">
+      <h2 class="h2" id="experience">Kinh nghiệm</h2>
+      <div class="industry-boxes">
+        <div class="industry-timeline"></div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects">
+    <div class="container">
+      <h2 class="h2" id="projects">Dự án gần đây</h2>
+      <div class="project-boxes">
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h2 class="h2" id="skills">Kỹ năng</h2>
+    <div class="container">
+      <ol class="skills">
+        <li class="skill-category">
+          <div class="domain-list">
+            
+          </div>
+        </li>
+        <li class="skill">
+          <h3 class="h3">Ngôn ngữ lập trình</h3>
+          <ol class="skill-list">
+            
+          </ol>
+        </li>
+        <li class="skill">
+          <h3 class="h3">Framework/Thư viện</h3>
+          <ol class="skill-list">
+            
+          </ol>
+        </li>
+        <li class="skill">
+          <h3 class="h3">Công cụ</h3>
+          <ol class="skill-list">
+            
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact">
+    <div class="container">
+      <h2 class="h2" id="contact">Liên hệ với tôi</h2>
+      <div class="contact-content">
+        <div class="contact-textbox">
+          <div class="hire-alert-div">
+            <a href="mailto:aditya.chaurasia8991@gmail.com" class="hire-alert">Gửi email cho tôi</a>
+          </div>
+
+          <p class="contact-text">
+            Tôi có niềm hứng thú đặc biệt với lập trình web và thiết kế giao diện người dùng,
+            thích khám phá cách công nghệ kết hợp với trải nghiệm người dùng để tạo ra những sản phẩm hữu ích.
+            Trong quá trình học tập, tôi đã tham gia một số dự án nhóm, từ đó rèn luyện kỹ năng phối hợp,
+            chia sẻ trách nhiệm và cùng nhau giải quyết vấn đề. Với động lực học hỏi không ngừng,
+            tôi mong muốn được đóng góp giá trị vào những dự án thực tế và phát triển bản thân trở thành một lập trình viên vững vàng.
+          </p>
+        </div>
+        <form action="/save-message" method="POST" class="contact-form">
+          <div class="form-field">
+            <label for="name">
+              Tên
+              
+            </label>
+            <input type="text" id="name" required
+                   placeholder="Nhập tên của bạn" name="name" value=""/>
+          </div>
+          <div class="form-field">
+            <label for="email">
+              Email
+              
+            </label>
+            <input type="email" id="email" required inputmode="email"
+                   placeholder="Nhập email của bạn" name="email" value=""/>
+            <!--                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>-->
+          </div>
+          <div class="form-field">
+            <label for="message">
+              Tôi có thể giúp gì cho bạn?
+              
+            </label>
+            <textarea id="message" required
+                      placeholder="Nhập tin nhắn của bạn" name="message"></textarea>
+            <!--                <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="text-danger"></div>-->
+          </div>
+          <button type="submit" class="btn btn-cta">Gửi</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <nav>
+        <ol class="footer-links">
+          <li class="footer-link">
+            <a title="GitHub" href="https://github.com/Yenhi6886" target="_blank" rel="noopener"
+            ><img
+                    loading="lazy"
+                    src="assets/images/social-links/github.svg"
+                    alt="GitHub"
+            /></a>
+          </li>
+          <li class="footer-link">
+            <a title="facebook" href="https://www.facebook.com/share/1Ccbyx3Cf6/?mibextid=wwXIfr" target="_blank" rel="noopener"
+            ><img
+                    loading="lazy"
+                    src="assets/images/social-links/face.png"
+                    alt="Linkedin"
+            /></a>
+          </li>
+        </ol>
+      </nav>
+      <p class="footer-text">
+        &copy; <span>2025</span> - Backend được phát triển và tích hợp bởi <a target="_blank" rel="noopener" href="https://github.com/Yenhi6886" style="text-decoration: none;">Yến Nhi</a>
+      </p>
+
+    </div>
+  </div>
+</footer>
+</body>
+</html>

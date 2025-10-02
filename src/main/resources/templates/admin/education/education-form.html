@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Học vấn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .shake:hover {
+            animation: shake 0.5s;
+        }
+        .sidebar {
+            transition: all 0.3s;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+<div class="flex h-screen">
+    <!-- Sidebar (same as index.html) -->
+    <div class="sidebar bg-indigo-900 text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-10">
+        <div class="text-white flex items-center space-x-2 px-4 mb-10">
+            <i data-feather="shield" class="w-8 h-8"></i>
+            <span class="text-2xl font-extrabold">Admin Panel</span>
+        </div>
+
+        <nav class="flex flex-col items-center">
+            <a href="/admin" class="w-full py-4 px-4 flex items-center space-x-2 text-white hover:bg-indigo-800 rounded transition duration-200 mb-4">
+                <i data-feather="home"></i>
+                <span class="font-semibold">Trang chủ Admin</span>
+            </a>
+
+            <a href="/admin/skills" class="w-5/6 py-3 px-4 text-center bg-white text-indigo-900 rounded-lg font-bold transition duration-200 mb-4 shake">
+                Kỹ năng
+            </a>
+
+            <a href="/admin/education" class="w-5/6 py-3 px-4 text-center bg-transparent border border-white rounded-lg font-bold text-white hover:bg-white hover:text-indigo-900 transition duration-200 mb-4 shake">
+                Học vấn
+            </a>
+
+            <a href="/admin/experience" class="w-5/6 py-3 px-4 text-center bg-transparent border border-white rounded-lg font-bold text-white hover:bg-white hover:text-indigo-900 transition duration-200 mb-4 shake">
+                Kinh nghiệm
+            </a>
+
+            <a href="/admin/projects" class="w-5/6 py-3 px-4 text-center bg-transparent border border-white rounded-lg font-bold text-white hover:bg-white hover:text-indigo-900 transition duration-200 mb-4 shake">
+                Dự án
+            </a>
+
+            <a href="/admin/messages" class="w-5/6 py-3 px-4 text-center bg-transparent border border-white rounded-lg font-bold text-white hover:bg-white hover:text-indigo-900 transition duration-200 mb-4 shake">
+                Tin nhắn
+            </a>
+
+            <a href="/" class="w-5/6 py-3 px-4 text-center bg-transparent border border-white rounded-lg font-bold text-white hover:bg-white hover:text-indigo-900 transition duration-200 mb-4 shake">
+                Quay lại Portfolio
+            </a>
+
+            <a href="/logout" class="w-5/6 py-3 px-4 text-center bg-transparent border border-red-500 rounded-lg font-bold text-red-500 hover:bg-red-500 hover:text-white transition duration-200 shake">
+                Đăng xuất
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-1 ml-0 md:ml-64 p-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-indigo-900 mb-4">Lưu Học vấn</h3>
+            <hr class="mb-6">
+
+            <form th:action="@{/admin/education/save}" th:object="${theEducation}" method="POST" class="space-y-4">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-4">
+                    <label for="universityName" class="block text-gray-700 font-medium mb-2">Tên Trường Đại học</label>
+                    <input type="text" th:field="*{universityName}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="universityName">
+                </div>
+
+                <div class="mb-4">
+                    <label for="degree" class="block text-gray-700 font-medium mb-2">Bằng cấp</label>
+                    <input type="text" th:field="*{degree}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="degree">
+                </div>
+
+                <div class="mb-4">
+                    <label for="program" class="block text-gray-700 font-medium mb-2">Chương trình</label>
+                    <input type="text" th:field="*{program}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="program">
+                </div>
+
+                <div class="mb-4">
+                    <label for="coursesTaken" class="block text-gray-700 font-medium mb-2">Các môn học đã học</label>
+                    <input type="text" th:field="*{coursesTaken}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="coursesTaken">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="startDate" class="block text-gray-700 font-medium mb-2">Ngày bắt đầu</label>
+                        <input type="date" th:field="*{startDate}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="startDate">
+                    </div>
+                    <div>
+                        <label for="endDate" class="block text-gray-700 font-medium mb-2">Ngày kết thúc</label>
+                        <input type="date" th:field="*{endDate}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="endDate">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="imagePath" class="block text-gray-700 font-medium mb-2">Đường dẫn hình ảnh</label>
+                    <input type="text" th:field="*{imagePath}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="imagePath">
+                </div>
+
+                <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">Lưu</button>
+            </form>
+
+            <hr class="my-6">
+            <div class="flex flex-wrap gap-4">
+                <a th:href="@{/admin/education}" class="text-indigo-600 hover:text-indigo-800 font-medium">Quay lại Danh sách Học vấn</a>
+                <a th:href="@{/admin}" class="text-indigo-600 hover:text-indigo-800 font-medium">Quay lại Trang quản trị</a>
+                <a th:href="@{/}" class="text-indigo-600 hover:text-indigo-800 font-medium">Quay lại Trang chủ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    feather.replace();
+</script>
+</body>
+</html>
